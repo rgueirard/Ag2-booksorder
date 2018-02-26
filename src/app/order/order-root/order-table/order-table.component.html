@@ -1,0 +1,42 @@
+<table>
+  <thead>
+  <tr>
+    <th>Titre</th>
+    <th>Auteur</th>
+    <th>Prix unitaire HT</th>
+    <th>Quantité</th>
+    <th>Montant HT</th>
+    <th>Montant TTC</th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <!--<tr *ngFor="let row of rows" [ngClass]="{'big': isBig(row)}">-->
+  <tr *ngFor="let row of rows" [class.big]="isBig(row)">
+    <td [textContent]="row.title | uppercase"></td>
+    <td>{{row.author}}</td>
+    <td class="right">{{row.price | currency:'EUR'}}</td>
+    <td class="right"><input type="number"
+                             [(ngModel)]="row.quantity"></td>
+    <!--(ngModelChange)="row.quantity = $event"></td>-->
+    <!-- marche avec tout les 'change' c'est une convention pas que ngModel
+    [toto]="row.quantity"></td>
+    (totoChange)="row.quantity = $event"></td>
+    =  [(toto)]="row.quantity"
+          -->
+    <td class="right">{{row.getHTPrices() | currency:'EUR'}}</td>
+    <td class="right">{{row.getTTCPrices() | currency:'EUR'}}</td>
+    <td><button (click)="removeBook.emit(row)">Supprimer</button></td>
+    <td><div class="bar-chart" [style.width.px]="row.getHTPrices()"></div></td>
+  </tr>
+  </tbody>
+  <tfoot>
+  <tr>
+    <td colspan="4">Total</td>
+    <td class="right">{{getTotalHT() | currency:'EUR'}}</td>
+    <td class="right">{{getTotalTTC() | currency:'EUR'}}</td>
+    <td></td>
+  </tr>
+  </tfoot>
+</table>

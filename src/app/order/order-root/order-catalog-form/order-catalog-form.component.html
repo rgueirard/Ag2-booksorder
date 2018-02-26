@@ -1,0 +1,9 @@
+<form (ngSubmit)="emitAdd()" #formSelect="ngForm">
+  <label>Livre
+    <select required  name="book" [(ngModel)]="catalog.book">
+      <option *ngFor="let book of books" [ngValue]="book">{{book.title}}</option>
+    </select>
+  </label>
+  <label>Quantité <input name="quantity" [(ngModel)]="catalog.quantity" type="number"></label>
+  <input type="submit" value="Ajouter" (keyup.enter)="submit()" [disabled]="formSelect.invalid">
+</form>

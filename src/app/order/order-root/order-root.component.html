@@ -1,0 +1,10 @@
+<div>
+  <app-order-table (removeBook)="removeRow($event)" [rows]="rows"></app-order-table>
+
+  <h2>Ajout (<input type="checkbox" [(ngModel)]="manualMode"> en mode manuel)</h2>
+  <app-order-manual-form *ngIf="manualMode" (addBook)="addRow($event)"></app-order-manual-form>
+
+<div *ngIf="books$ | async as books">
+  <app-order-catalog-form *ngIf="!manualMode" [books]="books" (addBook)="addRow($event)"></app-order-catalog-form>
+</div>
+</div>
